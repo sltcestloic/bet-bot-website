@@ -6,8 +6,6 @@ COPY . .
 
 RUN npm i
 
-RUN npm audit --omit=dev
-
 #RUN npm i -g serve
 
 ARG REACT_APP_BASE_URL
