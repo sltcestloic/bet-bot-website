@@ -13,7 +13,7 @@ ARG REACT_APP_REDIRECT_URL
 ARG REACT_APP_SOCKET_URL
 ARG REACT_APP_API42_CLIENT_ID
 
-RUN npm run build
+#RUN npm run build
 
 ENTRYPOINT [ "npm", "start" ]
 #ENTRYPOINT [ "serve", "-s", "build" ]
