@@ -32,7 +32,7 @@ function Home() {
 				<div className='h-1 bg-[#3D3E48] w-1/4'></div>
 			</section>
 			
-			<section className='text-white text-center'>
+			<section className='text-white text-center overflow-x'>
 
 				<div data-aos='fade-right' className='flex flex-col gap-8 items-center p-14'>
 					
