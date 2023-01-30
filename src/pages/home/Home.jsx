@@ -2,7 +2,8 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import React from 'react'
 import { useEffect } from 'react'
-import Header from '../components/Header'
+import Header from '../../components/Header'
+import Homecard from './component/Homecard'
 
 function Home() {
 	//			<a href="https://discord.com/api/oauth2/authorize?client_id=1010998423178203156&permissions=8208&scope=bot%20applications.commands" className='p-4 px-8 mt-5 font-medium rounded-lg bg-[#3994FF]'>Ajouter à Discord</a>
@@ -34,32 +35,22 @@ function Home() {
 			
 			<section className='text-white text-center overflow-x-hidden'>
 
-				<div data-aos='fade-right' className='flex flex-col gap-8 items-center p-14'>
-					
-					<div className='flex flex-col items-center gap-10 md:flex-row text-[#9B9D9F] p-5'>
-						<p className='max-w-sm'>Lance un paris sur le match de ton choix du sport de ton choix parmis les sports supportés, les côtes et les scores seront mis à jours automatiquement et le paris se terminera en même temps que le match</p>
-						<img className="max-w-sm" src="bet-example.png" alt='ouais'/>
-					</div>
-					
-				</div>
+				<Homecard 
+					text='Lanceeeeee un paris sur le match de ton choix du sport de ton choix parmis les sports supportés, les côtes et les scores seront mis à jours automatiquement et le paris se terminera en même temps que le match'
+					img='bet-example.png'
+					odd='ezez'
+				/>
 
-				<div data-aos='fade-left' className='flex flex-col gap-8 items-center p-14'>
-					
-					<div className='flex items-center flex-col md:flex-row gap-10 text-[#9B9D9F]'>
-						<img className="max-w-sm" src="result-example.png" alt='ouais'/>
-						<p className='max-w-sm'>À la fin du match, les résultats sont annoncés avec la liste des gains et des pertes, ainsi que les sommes et les côtes des paris placés</p>
-					</div>
-					
-				</div>
+				<Homecard 
+					text='À la fin du match, les résultats sont annoncés avec la liste des gains et des pertes, ainsi que les sommes et les côtes des paris placés'
+					img='result-example.png'
+				/>
 
-				<div data-aos='fade-right' className='flex flex-col gap-8 items-center p-14'>
-					
-					<div className='flex items-center flex-col md:flex-row gap-10 text-[#9B9D9F]'>
-						<p className='max-w-sm'>Plusieurs classements sont disponibles en fonction de différentes statistiques, des classements mensuels et des classement par compétition et par sports sont à venir !</p>
-						<img className="max-w-sm" src="ladder-example.png" alt='ouais'/>
-					</div>
-					
-				</div>
+				<Homecard 
+					text='Plusieurs classements sont disponibles en fonction de différentes statistiques, des classements mensuels et des classement par compétition et par sports sont à venir !'
+					img='ladder-example.png'
+					odd='ezez'
+				/>
 
 			</section>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3994FF" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
