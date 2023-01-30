@@ -32,11 +32,11 @@ function Home() {
 				<div className='h-1 bg-[#3D3E48] w-1/4'></div>
 			</section>
 			
-			<section className='text-white text-center overflow-x'>
+			<section className='text-white text-center overflow-x-hidden'>
 
 				<div data-aos='fade-right' className='flex flex-col gap-8 items-center p-14'>
 					
-					<div className='flex items-center gap-10 text-[#9B9D9F]'>
+					<div className='flex flex-col items-center gap-10 md:flex-row text-[#9B9D9F] p-5'>
 						<p className='max-w-sm'>Lance un paris sur le match de ton choix du sport de ton choix parmis les sports supportés, les côtes et les scores seront mis à jours automatiquement et le paris se terminera en même temps que le match</p>
 						<img className="max-w-sm" src="bet-example.png" alt='ouais'/>
 					</div>
@@ -45,7 +45,7 @@ function Home() {
 
 				<div data-aos='fade-left' className='flex flex-col gap-8 items-center p-14'>
 					
-					<div className='flex items-center gap-10 text-[#9B9D9F]'>
+					<div className='flex items-center flex-col md:flex-row gap-10 text-[#9B9D9F]'>
 						<img className="max-w-sm" src="result-example.png" alt='ouais'/>
 						<p className='max-w-sm'>À la fin du match, les résultats sont annoncés avec la liste des gains et des pertes, ainsi que les sommes et les côtes des paris placés</p>
 					</div>
@@ -54,7 +54,7 @@ function Home() {
 
 				<div data-aos='fade-right' className='flex flex-col gap-8 items-center p-14'>
 					
-					<div className='flex items-center gap-10 text-[#9B9D9F]'>
+					<div className='flex items-center flex-col md:flex-row gap-10 text-[#9B9D9F]'>
 						<p className='max-w-sm'>Plusieurs classements sont disponibles en fonction de différentes statistiques, des classements mensuels et des classement par compétition et par sports sont à venir !</p>
 						<img className="max-w-sm" src="ladder-example.png" alt='ouais'/>
 					</div>
