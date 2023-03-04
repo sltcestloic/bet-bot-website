@@ -6,7 +6,7 @@ function Header() {
   return (
     <div className='flex text-white p-8 items-center justify-between'>
         <div className='flex gap-3 items-center'>
-            <img width={40} height={40} src="logo192.png" alt="" />
+            <img width={40} height={40} src="logo-icon.png" alt="" />
             <Link to='/' className='text-2xl font-bold'>
                 BET BOT
             </Link> 
