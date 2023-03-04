@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  front:
+    build:
+      dockerfile: Dockerfile
+    container_name: betbotsite
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    networks:
+      - caddy
+
+networks:
+   caddy:
+      external: true
