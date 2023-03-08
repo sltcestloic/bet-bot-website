@@ -9,7 +9,7 @@ function Home() {
 	//			<a href="https://discord.com/api/oauth2/authorize?client_id=1010998423178203156&permissions=8208&scope=bot%20applications.commands" className='p-4 px-8 mt-5 font-medium rounded-lg bg-[#3994FF]'>Ajouter à Discord</a>
 
 	useEffect(() => {
-		Aos.init({ duration: 1000 })
+		Aos.init({ duration: 1500 })
 	}, [])
 
 	return (
