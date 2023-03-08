@@ -36,7 +36,7 @@ function Home() {
 			<section className='text-white text-center overflow-x-hidden'>
 
 				<Homecard 
-					text='Lance un paris sur le match de ton choix du sport de ton choix parmis les sports supportés, les côtes et les scores seront mis à jours automatiquement et le paris se terminera en même temps que le match'
+					text='Lance un paris sur le match de ton choix du sport de ton choix parmis les sports supportés, les côtes et les scores seront mis à jours automatiquement pendant le match et le paris se terminera tout seul à la fin'
 					img='bet-example.png'
 					odd='ezez'
 				/>
