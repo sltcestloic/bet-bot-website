@@ -9,5 +9,5 @@ services:
       - /app/node_modules
       - ./:/app
     ports:
-      - "127.0.0.1:4201:4200"
+      - "127.0.0.1:4201:3000"
     restart: always
