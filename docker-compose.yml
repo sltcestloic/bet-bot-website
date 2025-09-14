@@ -8,9 +8,6 @@ services:
     volumes:
       - /app/node_modules
       - ./:/app
-    networks:
-      - caddy
-
-networks:
-   caddy:
-      external: true
+    ports:
+      - "127.0.0.1:4201:4200"
+    restart: always
