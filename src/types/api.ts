@@ -15,4 +15,11 @@ export type User = Entity<{
   last_active: Date;
   lastdaily: number;
   streak: number;
+  role: 'ADMIN' | 'USER';
+}>;
+
+export type Guild = Entity<{
+  discordId: string;
+  name: string;
+  iconUrl: string;
 }>;
