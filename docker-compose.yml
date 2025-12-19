@@ -1,0 +1,9 @@
+services:
+  bet-bot-website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bet-bot-website
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3001:80"
