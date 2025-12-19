@@ -7,8 +7,20 @@ import { paths } from '@/config/paths';
 import { User } from '@/types/api';
 
 const getUser = async (): Promise<User> => {
-  const response = await api.get('/auth/me');
-  return response.data;
+  return {
+    id: '1',
+    username: 'Demo User',
+    balance: 1000,
+    createdAt: new Date(),
+    discordId: '123456789012345678',
+    guildId: '987654321098765432',
+    last_active: new Date(),
+    lastdaily: 0,
+    role: 'USER',
+    streak: 0,
+  };
+  //   const response = await api.get('/auth/me');
+  //   return response.data;
 };
 
 const logout = async (): Promise<void> => {

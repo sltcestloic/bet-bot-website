@@ -2,8 +2,9 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 
-import Head from '@/components/seo/head';
+import Head from '@/components/ui/head/head';
 import Homecard from '@/features/landing/components/home-card';
+import { CheckIcon } from '@radix-ui/react-icons';
 
 const LandingRoute = () => {
   useEffect(() => {
@@ -11,18 +12,18 @@ const LandingRoute = () => {
   }, []);
 
   return (
-    <div className="bg-[#272934]">
+    <div className="bg-[#272934] w-full">
       <Head />
 
       <section className="text-white flex flex-col gap-8 items-center p-5">
         <h2 className="font-bold text-4xl text-center">
           Paris sportifs virtuels sur Discord
         </h2>
-        <p className="text-[#9B9D9F] text-center">
+        <p className="text-[var(--text-secondary)] text-center">
           Bet Bot vous permet de parier sur n'importe quelle rencontre sportive
           en direct
         </p>
-        <p className="text-[#9B9D9F] text-center">
+        <p className="text-[var(--text-secondary)] text-center">
           Pas d'argent réel, uniquement une monnaie fictive pour parier sans
           risques et ajouter de l'enjeu aux plus grands matchs
         </p>
@@ -35,21 +36,21 @@ const LandingRoute = () => {
 
         <div className="h-1 bg-[#3D3E48] w-1/4"></div>
         <ul className="flex flex-col gap-4">
-          <li className="text-[#9B9D9F] flex gap-3 items-center">
-            <i className="fa-solid fa-check text-[#63F58C]"></i>Côtes et scores
-            en direct
+          <li className="text-[var(--text-secondary)] flex gap-3 items-center">
+            <CheckIcon className="text-[var(--color-success)]" />
+            Côtes et scores en direct
           </li>
-          <li className="text-[#9B9D9F] flex gap-3 items-center">
-            <i className="fa-solid fa-check text-[#63F58C]"></i>Pas d'argent
-            réel
+          <li className="text-[var(--text-secondary)] flex gap-3 items-center">
+            <CheckIcon className="text-[var(--color-success)]" />
+            Pas d'argent réel
           </li>
-          <li className="text-[#9B9D9F] flex gap-3 items-center">
-            <i className="fa-solid fa-check text-[#63F58C]"></i>Classement des
-            meilleurs parieurs
+          <li className="text-[var(--text-secondary)] flex gap-3 items-center">
+            <CheckIcon className="text-[var(--color-success)]" />
+            Classement des meilleurs parieurs
           </li>
-          <li className="text-[#9B9D9F] flex gap-3 items-center">
-            <i className="fa-solid fa-check text-[#63F58C]"></i>Statistiques et
-            profils d'utilisateurs
+          <li className="text-[var(--text-secondary)] flex gap-3 items-center">
+            <CheckIcon className="text-[var(--color-success)]" />
+            Statistiques et profils d'utilisateurs
           </li>
         </ul>
         <div className="h-1 bg-[#3D3E48] w-1/4"></div>
