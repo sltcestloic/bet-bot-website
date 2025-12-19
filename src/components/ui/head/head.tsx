@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
 import logo from '@/assets/logo-icon.png';
-import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { MenuIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Head = () => {
   return (

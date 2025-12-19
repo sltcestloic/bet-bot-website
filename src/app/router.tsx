@@ -28,7 +28,7 @@ const createAppRouter = (queryClient: QueryClient) =>
       lazy: () => import('./routes/landing').then(convert(queryClient)),
     },
     {
-      path: paths.app.root.path,
+      path: paths.app.dashboard.path,
       element: (
         <ProtectedRoute>
           <AppRoot />
