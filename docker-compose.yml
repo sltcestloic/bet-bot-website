@@ -1,13 +1,15 @@
-version: '3.8'
-
 services:
-  front:
+  client:
     build:
+      context: .
       dockerfile: Dockerfile
+    restart: unless-stopped
     container_name: betbotsite
-    volumes:
-      - /app/node_modules
-      - ./:/app
     ports:
       - "127.0.0.1:4201:3000"
-    restart: always
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

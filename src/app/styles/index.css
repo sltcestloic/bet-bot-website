@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Avenir Next", "Segoe UI", Arial, sans-serif;
+}
+
+:root {
+  font-family: var(--font-sans);
+  color: #15171e;
+  background: #11131a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero-photo {
+  background-image: url('../../assets/stadium.jpg');
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.02);
+}
+
+.hero-shade {
+  background: linear-gradient(90deg, rgba(12, 14, 20, 0.96) 0%, rgba(12, 14, 20, 0.8) 46%, rgba(12, 14, 20, 0.4) 100%), linear-gradient(0deg, rgba(12, 14, 20, 0.62), transparent 55%);
+}
+
+.hero-grid {
+  background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to right, black, transparent 72%);
+}
+
+.hero-ui-ticket {
+  transform: perspective(1200px) rotateY(7deg) rotateZ(-2deg);
+}
+
+.hero-ui-result {
+  transform: perspective(1200px) rotateY(-5deg) rotateZ(1.5deg);
+}
+
+.feature-accent {
+  position: absolute;
+  width: 72%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  opacity: .16;
+  filter: blur(1px);
+}
+
+.feature-accent-blue { background: #5865f2; }
+.feature-accent-coral { background: #f07468; }
+.feature-accent-gold { background: #f4c25b; }
+.feature-accent-green { background: #3aba85; }
+
+.feature-icon {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.feature-icon-blue { background: #e3e5ff; color: #4f5bd5; }
+.feature-icon-coral { background: #ffe3df; color: #c54f45; }
+.feature-icon-gold { background: #fff0c9; color: #9a6900; }
+.feature-icon-green { background: #d9f5e9; color: #167a55; }
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-dot-blue { background: #5865f2; }
+.status-dot-coral { background: #f07468; }
+.status-dot-gold { background: #e7a823; }
+.status-dot-green { background: #3aba85; }
+
+.leader-stage::before {
+  content: '';
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -40px;
+  top: 8px;
+  border: 1px solid rgba(244, 194, 91, .25);
+  border-radius: 50%;
+}
+
+.cta-lines {
+  background-image: repeating-linear-gradient(120deg, transparent 0, transparent 48px, rgba(255,255,255,.12) 49px, transparent 50px);
+}
+
+.cta-panel {
+  border: 1px solid rgba(151, 160, 238, .34);
+  background:
+    linear-gradient(115deg, rgba(88, 101, 242, .22), transparent 42%),
+    linear-gradient(135deg, #252936 0%, #343a60 54%, #252639 100%);
+}
+
+.cta-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0 12% auto;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #7180ff 34%, #c282d2 66%, transparent);
+  opacity: .95;
+}
+
+.cta-primary {
+  animation: cta-pulse 2.2s ease-out infinite;
+}
+
+.cta-primary:hover {
+  animation-play-state: paused;
+}
+
+.reveal-section {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 700ms ease, transform 700ms cubic-bezier(.2, .7, .2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-section[data-state='visible'] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes cta-pulse {
+  0%, 35%, 100% {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .22), 0 0 0 0 rgba(132, 143, 255, .72);
+  }
+  68% {
+    box-shadow: 0 12px 36px rgba(70, 79, 185, .38), 0 0 0 16px rgba(132, 143, 255, 0);
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-shade {
+    background: linear-gradient(180deg, rgba(12, 14, 20, .9) 0%, rgba(12, 14, 20, .78) 45%, rgba(12, 14, 20, .5) 100%), linear-gradient(90deg, rgba(12,14,20,.72), rgba(12,14,20,.25));
+  }
+}
+
+@media (max-width: 639px) {
+  .hero {
+    min-height: 810px;
+  }
+
+  .hero > div:nth-of-type(4) {
+    min-height: 810px;
+  }
+
+  .hero-stage {
+    height: 220px;
+  }
+
+  .hero-photo {
+    background-position: 58% center;
+  }
+
+  .feature-band .discord-window {
+    max-height: 410px;
+  }
+
+  .feature-band .discord-window img {
+    max-height: 350px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .reveal-section {
+    opacity: 1;
+    transform: none;
+  }
+}
