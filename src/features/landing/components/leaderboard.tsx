@@ -11,7 +11,7 @@ export function Leaderboard() {
   return (
     <section id="classements" className="overflow-hidden bg-[#171920] text-white">
       <div className="mx-auto grid max-w-[1180px] items-center gap-14 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-        <div className="max-w-[520px]">
+        <div data-aos="fade-up" className="max-w-[520px]">
           <div className="mb-5 flex items-center gap-3 text-[#f4c25b]">
             <span className="flex size-10 items-center justify-center rounded-md bg-[#f4c25b]/12"><Trophy className="size-5" /></span>
             <span className="text-xs font-black uppercase tracking-[0.15em]">Classements</span>
@@ -29,7 +29,7 @@ export function Leaderboard() {
           </div>
         </div>
 
-        <div className="leader-stage relative min-h-[470px] sm:min-h-[600px]">
+        <div data-aos="fade-up" data-aos-delay="50" className="leader-stage relative min-h-[470px] sm:min-h-[600px]">
           <div className="absolute inset-[8%_0_0_8%] rounded-md border border-white/8 bg-[#22252e]" />
           <div className="absolute left-0 top-[2%] z-10 w-[82%] max-w-[520px] overflow-hidden rounded-md border border-white/10 bg-[#313338] shadow-[0_35px_90px_rgba(0,0,0,0.45)]">
             <div className="flex h-11 items-center gap-2 border-b border-white/8 bg-[#292b31] px-4 text-xs font-bold text-white/50"><Users className="size-4" /> # classement</div>

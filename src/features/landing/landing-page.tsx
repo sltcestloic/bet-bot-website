@@ -1,4 +1,3 @@
-import { Reveal } from '../../components/ui/reveal'
 import { FeatureSection } from './components/feature-section'
 import { FinalCta } from './components/final-cta'
 import { Hero } from './components/hero'
@@ -11,16 +10,14 @@ export function LandingPage() {
   return (
     <main>
       <Hero />
-      <Reveal><IntroStrip /></Reveal>
+      <IntroStrip />
       <div id="fonctionnalites">
         {landingFeatures.map((feature, index) => (
-          <Reveal key={feature.id}>
-            <FeatureSection feature={feature} index={index} />
-          </Reveal>
+          <FeatureSection key={feature.id} feature={feature} index={index} />
         ))}
       </div>
-      <Reveal><Leaderboard /></Reveal>
-      <Reveal><FinalCta /></Reveal>
+      <Leaderboard />
+      <FinalCta />
       <SiteFooter />
     </main>
   )

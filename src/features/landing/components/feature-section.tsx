@@ -13,7 +13,7 @@ export function FeatureSection({ feature, index }: FeatureSectionProps) {
   return (
     <section id={feature.id} className={`feature-band text-white ${index % 2 === 0 ? 'bg-[#1b1e26]' : 'bg-[#20232c]'}`}>
       <div className={`mx-auto grid max-w-[1180px] items-center gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-2 lg:gap-20 ${reversed ? 'lg:[&>*:first-child]:order-2' : ''}`}>
-        <div className="relative flex min-h-[410px] items-center justify-center sm:min-h-[560px]">
+        <div data-aos="fade-up" className="relative flex min-h-[410px] items-center justify-center sm:min-h-[560px]">
           <div className={`feature-accent feature-accent-${feature.tone}`} />
           <div className="discord-window relative z-10 w-full max-w-[520px] overflow-hidden rounded-md border border-[#474a55] bg-[#313338] shadow-[0_28px_70px_rgba(25,27,34,0.22)]">
             <div className="flex h-11 items-center justify-between border-b border-white/8 bg-[#292b31] px-4 text-[11px] font-bold text-white/55">
@@ -29,7 +29,7 @@ export function FeatureSection({ feature, index }: FeatureSectionProps) {
           </div>
         </div>
 
-        <div className="max-w-[520px]">
+        <div data-aos="fade-up" data-aos-delay="50" className="max-w-[520px]">
           <div className="mb-5 flex items-center gap-3">
             <span className={`feature-icon feature-icon-${feature.tone}`}><Icon className="size-5" aria-hidden="true" /></span>
             <span className="text-xs font-black uppercase tracking-[0.15em] text-[#aeb3c2]">{feature.eyebrow}</span>
