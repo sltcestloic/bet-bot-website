@@ -8,11 +8,12 @@ Use the [Bulletproof React](https://github.com/alan2207/bulletproof-react) archi
 - Never import between features; compose features in the application layer instead.
 - Use direct file imports, avoid feature barrel files, and create only the directories and abstractions currently needed.
 
-Use test-driven development for code changes:
+Use test-driven development for feature and behavioral code changes:
 
 - Write or update tests for the intended behavior before writing the implementation.
 - Confirm the new test fails for the expected reason.
 - Write the minimum code needed to make it pass, then refactor while keeping the test suite green.
+- Do not add tests solely for static styling, copy, assets, or configuration changes unless explicitly requested.
 
 This project is public and open source. Never commit or publish secrets, credentials, API keys, tokens, private URLs, or populated environment files. Use ignored local environment files and provide only sanitized placeholders in files such as `.env.example`.
 
