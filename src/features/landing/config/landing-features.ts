@@ -19,7 +19,7 @@ export type LandingFeature = {
 
 export const landingFeatures: LandingFeature[] = [
   {
-    id: 'matchs',
+    id: 'matches',
     eyebrow: 'Matchs en direct',
     title: 'Chaque match devient un rendez-vous collectif.',
     description:
@@ -31,7 +31,7 @@ export const landingFeatures: LandingFeature[] = [
     tone: 'blue',
   },
   {
-    id: 'combines',
+    id: 'parlays',
     eyebrow: 'Combinés',
     title: 'Plusieurs intuitions. Un seul ticket.',
     description:
@@ -43,7 +43,7 @@ export const landingFeatures: LandingFeature[] = [
     tone: 'coral',
   },
   {
-    id: 'resultats',
+    id: 'results',
     eyebrow: 'Résultats et gains',
     title: 'Le coup de sifflet final lance les réactions.',
     description:
@@ -55,7 +55,7 @@ export const landingFeatures: LandingFeature[] = [
     tone: 'gold',
   },
   {
-    id: 'paris',
+    id: 'active-bets',
     eyebrow: 'Prédictions actives',
     title: 'Tout ce qui est en jeu, toujours sous les yeux.',
     description:

@@ -3,7 +3,7 @@ import logoImage from '../../../assets/logo.png'
 
 export function FinalCta() {
   return (
-    <section id="ajouter" className="relative overflow-hidden bg-[#15171e] px-5 py-20 sm:px-8 sm:py-28">
+    <section id="add-to-server" className="relative overflow-hidden bg-[#15171e] px-5 py-20 sm:px-8 sm:py-28">
       <div data-aos="fade-up" className="cta-panel relative mx-auto max-w-[1180px] overflow-hidden rounded-md px-6 py-14 text-center text-white shadow-[0_30px_80px_rgba(68,76,170,0.2)] sm:px-12 sm:py-20">
         <div className="cta-lines absolute inset-0 opacity-20" />
         <div className="relative mx-auto max-w-[760px]">

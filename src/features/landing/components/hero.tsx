@@ -6,7 +6,7 @@ import { SiteHeader } from './site-header'
 
 export function Hero() {
   return (
-    <section id="accueil" className="hero relative isolate min-h-[92svh] overflow-hidden bg-[#11131a] text-white">
+    <section id="home" className="hero relative isolate min-h-[92svh] overflow-hidden bg-[#11131a] text-white">
       <div className="hero-photo absolute inset-0 -z-30" />
       <div className="hero-shade absolute inset-0 -z-20" />
       <div className="hero-grid absolute inset-0 -z-10 opacity-25" />
@@ -32,7 +32,7 @@ export function Hero() {
               <ArrowRight className="size-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
             </DiscordButton>
             <span className="hidden sm:contents">
-              <DiscordButton secondary href="#fonctionnalites">
+              <DiscordButton secondary href="#features">
                 Voir les fonctionnalités
                 <ChevronDown className="size-4" aria-hidden="true" />
               </DiscordButton>

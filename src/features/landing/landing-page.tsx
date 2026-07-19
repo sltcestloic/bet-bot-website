@@ -11,7 +11,7 @@ export function LandingPage() {
     <main>
       <Hero />
       <IntroStrip />
-      <div id="fonctionnalites">
+      <div id="features">
         {landingFeatures.map((feature, index) => (
           <FeatureSection key={feature.id} feature={feature} index={index} />
         ))}

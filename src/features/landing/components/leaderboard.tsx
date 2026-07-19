@@ -9,7 +9,7 @@ const leaderboardModes = [
 
 export function Leaderboard() {
   return (
-    <section id="classements" className="overflow-hidden bg-[#171920] text-white">
+    <section id="leaderboards" className="overflow-hidden bg-[#171920] text-white">
       <div className="mx-auto grid max-w-[1180px] items-center gap-14 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div data-aos="fade-up" className="max-w-[520px]">
           <div className="mb-5 flex items-center gap-3 text-[#f4c25b]">
