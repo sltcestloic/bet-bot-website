@@ -3,13 +3,51 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: client
     restart: unless-stopped
     container_name: betbotsite
     ports:
       - "127.0.0.1:4201:3000"
+    depends_on:
+      server:
+        condition: service_healthy
+    networks:
+      - app
     healthcheck:
       test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 10s
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: server
+    restart: unless-stopped
+    environment:
+      APP_ORIGIN: ${APP_ORIGIN}
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
+      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_SSL: ${DATABASE_SSL:-false}
+      SESSION_COOKIE_SECRET: ${SESSION_COOKIE_SECRET}
+      SERVER_PORT: 3001
+      NODE_ENV: production
+    expose:
+      - "3001"
+    networks:
+      - app
+      - postgres
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3001/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+networks:
+  app:
+  postgres:
+    external: true
