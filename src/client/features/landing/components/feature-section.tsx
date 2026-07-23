@@ -53,7 +53,7 @@ export function FeatureSection({ feature, index }: FeatureSectionProps) {
             </div>
           </div>
           <div className="absolute right-[2%] bottom-[4%] z-20 hidden items-center gap-2 rounded-md border border-white/10 bg-[#11131a] px-3 py-2 text-xs font-extrabold text-white shadow-lg sm:flex">
-            <span className={`status-dot status-dot-${feature.tone}`} /> En direct dans Discord
+            <span className={`status-dot status-dot-${feature.tone}`} /> En direct sur Discord
           </div>
         </div>
       </div>

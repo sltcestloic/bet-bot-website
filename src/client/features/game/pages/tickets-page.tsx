@@ -66,7 +66,7 @@ export function TicketsPage() {
         {state.data.tickets.length ? (
           <GameTicketList tickets={state.data.tickets} />
         ) : (
-          <GameEmpty title="Aucun ticket ici" description="Essayez une autre période ou placez votre prochaine prédiction dans Discord." />
+          <GameEmpty title="Aucun ticket ici" description="Essayez une autre période ou placez votre prochaine prédiction sur Discord." />
         )}
       </div>
       {sheet && (

@@ -24,7 +24,7 @@ export const landingFeatures: LandingFeature[] = [
     eyebrow: 'Matchs en direct',
     title: 'Chaque match devient un rendez-vous collectif.',
     description:
-      'Bet Bot publie un aperçu complet directement dans Discord : équipes et drapeaux, score, temps de jeu, événements et cotes. Les membres choisissent leur prédiction en un clic, sans quitter le salon.',
+      'Bet Bot publie un aperçu complet directement sur Discord : équipes et drapeaux, score, temps de jeu, événements et cotes. Les membres choisissent leur prédiction en un clic, sans quitter le salon.',
     bullets: ['Score et temps actualisés', 'Cotes claires', 'Boutons de prédiction rapides'],
     image: matchEmbedImage,
     alt: 'Aperçu Discord d’un match France Argentine avec score, événements et boutons de prédiction',

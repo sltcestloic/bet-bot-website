@@ -34,7 +34,7 @@ export function ProfilePage() {
         <div className="mt-8">
           <GameEmpty
             title="Votre profil attend son premier ticket"
-            description="Placez une prédiction dans Discord pour entrer dans l’arène et débloquer vos statistiques."
+            description="Placez une prédiction sur Discord pour entrer dans l’arène et débloquer vos statistiques."
             action={
               <a
                 href={`https://discord.com/channels/${guildId}`}
@@ -150,7 +150,7 @@ function ProfilePanels({
               <GameTicketList tickets={active} />
             </div>
           ) : (
-            <GameEmpty title="Aucun ticket en cours" description="La prochaine prédiction se joue dans Discord." />
+            <GameEmpty title="Aucun ticket en cours" description="La prochaine prédiction se joue sur Discord." />
           )}
         </GamePanel>
         <GamePanel className="p-4 sm:p-5">

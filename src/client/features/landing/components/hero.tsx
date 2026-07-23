@@ -53,7 +53,7 @@ export function Hero({ viewer }: { viewer?: LandingViewer | null }) {
 
         <div
           className="hero-stage relative h-[300px] self-end sm:h-[390px] lg:h-[610px] lg:self-center"
-          aria-label="Aperçu de Bet Bot dans Discord"
+          aria-label="Aperçu de Bet Bot sur Discord"
         >
           <div className="hero-ui hero-ui-ticket absolute top-[8%] left-[2%] z-20 w-[43%] max-w-[290px] overflow-hidden rounded-md border border-white/10 bg-[#313338] shadow-[0_30px_80px_rgba(0,0,0,0.58)] sm:top-[14%] sm:left-[8%] lg:top-[18%] lg:left-[4%] lg:w-[44%]">
             <div className="flex h-8 items-center gap-1.5 border-b border-white/8 bg-[#292b31] px-3">
