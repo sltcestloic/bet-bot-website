@@ -1,4 +1,5 @@
 import { LoaderCircle } from 'lucide-react'
+
 import logoImage from '@/client/assets/logo.png'
 
 export function AuthLoadingPage() {

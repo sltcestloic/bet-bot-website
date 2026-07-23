@@ -1,11 +1,12 @@
-import { Coins, Layers3, MousePointerClick, Zap } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { Coins, Layers3, MousePointerClick, Zap } from 'lucide-react'
+
 import basketImage from '@/client/assets/basket.png'
 import matchEmbedImage from '@/client/assets/match embed.png'
 import matchResultImage from '@/client/assets/match result.png'
 import myBetsImage from '@/client/assets/mybets.png'
 
-export type LandingFeature = {
+export interface LandingFeature {
   id: string
   eyebrow: string
   title: string

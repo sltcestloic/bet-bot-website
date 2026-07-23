@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm'
+
 import { AuthSessionEntity } from '@/server/auth/entities/auth-session.entity'
 
 @Entity({ name: 'users' })
@@ -24,6 +25,6 @@ export class UserEntity {
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz' })
   updatedAt!: Date
 
-  @OneToMany(() => AuthSessionEntity, (session) => session.user)
+  @OneToMany(() => AuthSessionEntity, session => session.user)
   sessions!: AuthSessionEntity[]
 }

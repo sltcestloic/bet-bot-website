@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common'
-import { UsersService } from '@/server/users/services/users.service'
+
 import { AuthSessionService } from '@/server/auth/services/auth-session.service'
 import { DiscordOAuthService } from '@/server/auth/services/discord-oauth.service'
 import { OAuthLoginAttemptService } from '@/server/auth/services/oauth-login-attempt.service'
 import { ReturnToService } from '@/server/auth/services/return-to.service'
+import { UsersService } from '@/server/users/services/users.service'
 
 @Injectable()
 export class AuthService {
@@ -15,19 +16,19 @@ export class AuthService {
     private readonly sessions: AuthSessionService,
   ) {}
 
-  async startDiscordLogin(destination?: string) {
+  async startDiscordLogin(destination: string | undefined, callbackUrl: string) {
     const returnTo = this.returnTo.normalize(destination)
     const attempt = await this.loginAttempts.create(returnTo)
 
     return {
-      authorizationUrl: this.discordOAuth.getAuthorizationUrl(attempt.state),
+      authorizationUrl: this.discordOAuth.getAuthorizationUrl(attempt.state, callbackUrl),
       browserToken: attempt.browserToken,
     }
   }
 
-  async completeDiscordLogin(code: string, state: string, browserToken: string) {
+  async completeDiscordLogin(code: string, state: string, browserToken: string, callbackUrl: string) {
     const returnTo = await this.loginAttempts.consume(state, browserToken)
-    const profile = await this.discordOAuth.getUserFromCode(code)
+    const profile = await this.discordOAuth.getUserFromCode(code, callbackUrl)
     const user = await this.users.synchronizeDiscordProfile(profile)
     const session = await this.sessions.create(user)
 

@@ -1,11 +1,8 @@
-import { redirect, type LoaderFunctionArgs } from 'react-router-dom'
-import {
-  AuthenticationRequiredError,
-  AuthServiceUnavailableError,
-  getCurrentUser,
-} from '@/client/features/auth/api/auth-api'
-import type { PublicUser } from '@/client/features/auth/types/public-user'
+import { type LoaderFunctionArgs, redirect } from 'react-router-dom'
+
 import { normalizeReturnTo } from '@/client/features/auth/routing/return-to'
+import { AuthenticationRequiredError, AuthServiceUnavailableError, getCurrentUser } from '@/client/lib/auth-api'
+import type { PublicUser } from '@/client/lib/public-user'
 
 type GetCurrentUser = () => Promise<PublicUser>
 

@@ -1,13 +1,11 @@
-import type { PublicUser } from '@/client/features/auth/types/public-user'
+import type { PublicUser } from '@/client/lib/public-user'
 
 type FetchImplementation = typeof fetch
 
 export class AuthenticationRequiredError extends Error {}
 export class AuthServiceUnavailableError extends Error {}
 
-export async function getCurrentUser(
-  fetchImplementation: FetchImplementation = fetch,
-): Promise<PublicUser> {
+export async function getCurrentUser(fetchImplementation: FetchImplementation = fetch): Promise<PublicUser> {
   let response: Response
 
   try {
@@ -22,12 +20,12 @@ export async function getCurrentUser(
   if (response.status === 401) throw new AuthenticationRequiredError()
   if (!response.ok) throw new AuthServiceUnavailableError()
 
-  const user = await response.json() as Partial<PublicUser>
+  const user = (await response.json()) as Partial<PublicUser>
   if (
-    typeof user.id !== 'string'
-    || typeof user.username !== 'string'
-    || typeof user.displayName !== 'string'
-    || typeof user.avatarUrl !== 'string'
+    typeof user.id !== 'string' ||
+    typeof user.username !== 'string' ||
+    typeof user.displayName !== 'string' ||
+    typeof user.avatarUrl !== 'string'
   ) {
     throw new AuthServiceUnavailableError()
   }

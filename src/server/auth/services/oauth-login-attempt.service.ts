@@ -1,10 +1,11 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { LessThan, MoreThan, Repository } from 'typeorm'
+
 import { AUTH_CLOCK, OAUTH_ATTEMPT_DURATION_MS } from '@/server/auth/auth.constants'
 import { OAuthLoginAttemptEntity } from '@/server/auth/entities/oauth-login-attempt.entity'
-import type { Clock } from '@/server/auth/types/clock'
 import { AuthTokenService } from '@/server/auth/services/auth-token.service'
+import type { Clock } from '@/server/auth/types/clock'
 
 @Injectable()
 export class OAuthLoginAttemptService {
@@ -24,12 +25,14 @@ export class OAuthLoginAttemptService {
     const browser = this.tokens.issue()
 
     await this.cleanupExpired(now)
-    await this.attempts.save(this.attempts.create({
-      stateHash: state.tokenHash,
-      browserTokenHash: browser.tokenHash,
-      returnTo,
-      expiresAt: new Date(now.getTime() + OAUTH_ATTEMPT_DURATION_MS),
-    }))
+    await this.attempts.save(
+      this.attempts.create({
+        stateHash: state.tokenHash,
+        browserTokenHash: browser.tokenHash,
+        returnTo,
+        expiresAt: new Date(now.getTime() + OAUTH_ATTEMPT_DURATION_MS),
+      }),
+    )
 
     return { state: state.token, browserToken: browser.token }
   }

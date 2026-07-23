@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+
 import { AuthTokenService } from '@/server/auth/services/auth-token.service'
 
 describe('AuthTokenService', () => {

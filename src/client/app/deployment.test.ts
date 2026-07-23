@@ -1,13 +1,17 @@
 import { readFileSync } from 'node:fs'
+
 import { describe, expect, it } from 'vitest'
 import { parse } from 'yaml'
 
-type ComposeConfig = {
-  services: Record<string, {
-    build: { context: string; dockerfile: string; target: string }
-    ports?: string[]
-    networks?: string[]
-  }>
+interface ComposeConfig {
+  services: Record<
+    string,
+    {
+      build: { context: string; dockerfile: string; target: string }
+      ports?: string[]
+      networks?: string[]
+    }
+  >
   networks: Record<string, { external?: boolean }>
 }
 

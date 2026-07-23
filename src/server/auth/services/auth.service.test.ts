@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
+
 import { AuthService } from '@/server/auth/services/auth.service'
 
 describe('AuthService', () => {
@@ -8,21 +9,15 @@ describe('AuthService', () => {
       create: vi.fn().mockResolvedValue({ state: 'state-token', browserToken: 'browser-token' }),
     }
     const discordOAuth = { getAuthorizationUrl: vi.fn(() => 'https://discord.com/oauth2/authorize?...') }
-    const service = new AuthService(
-      returnToService as never,
-      loginAttempts as never,
-      discordOAuth as never,
-      {} as never,
-      {} as never,
-    )
+    const service = new AuthService(returnToService, loginAttempts as never, discordOAuth as never, {} as never, {} as never)
 
-    await expect(service.startDiscordLogin('//unsafe.test')).resolves.toEqual({
+    await expect(service.startDiscordLogin('//unsafe.test', 'http://192.168.1.19:5173/api/auth/discord/callback')).resolves.toEqual({
       authorizationUrl: 'https://discord.com/oauth2/authorize?...',
       browserToken: 'browser-token',
     })
     expect(returnToService.normalize).toHaveBeenCalledWith('//unsafe.test')
     expect(loginAttempts.create).toHaveBeenCalledWith('/dashboard')
-    expect(discordOAuth.getAuthorizationUrl).toHaveBeenCalledWith('state-token')
+    expect(discordOAuth.getAuthorizationUrl).toHaveBeenCalledWith('state-token', 'http://192.168.1.19:5173/api/auth/discord/callback')
   })
 
   it('consumes the callback, synchronizes the user, and creates a session', async () => {
@@ -38,22 +33,18 @@ describe('AuthService', () => {
     const discordOAuth = { getUserFromCode: vi.fn().mockResolvedValue(profile) }
     const users = { synchronizeDiscordProfile: vi.fn().mockResolvedValue(user) }
     const sessions = { create: vi.fn().mockResolvedValue({ token: 'session-token', expiresAt: nowPlusSevenDays() }) }
-    const service = new AuthService(
-      {} as never,
-      loginAttempts as never,
-      discordOAuth as never,
-      users as never,
-      sessions as never,
-    )
+    const service = new AuthService({} as never, loginAttempts as never, discordOAuth as never, users as never, sessions as never)
 
-    await expect(service.completeDiscordLogin('code', 'state', 'browser')).resolves.toEqual({
+    await expect(
+      service.completeDiscordLogin('code', 'state', 'browser', 'http://192.168.1.19:5173/api/auth/discord/callback'),
+    ).resolves.toEqual({
       returnTo: '/dashboard',
       sessionToken: 'session-token',
       sessionExpiresAt: nowPlusSevenDays(),
       user,
     })
     expect(loginAttempts.consume).toHaveBeenCalledWith('state', 'browser')
-    expect(discordOAuth.getUserFromCode).toHaveBeenCalledWith('code')
+    expect(discordOAuth.getUserFromCode).toHaveBeenCalledWith('code', 'http://192.168.1.19:5173/api/auth/discord/callback')
     expect(users.synchronizeDiscordProfile).toHaveBeenCalledWith(profile)
     expect(sessions.create).toHaveBeenCalledWith(user)
   })

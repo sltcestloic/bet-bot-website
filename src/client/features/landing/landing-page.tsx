@@ -6,10 +6,15 @@ import { Leaderboard } from '@/client/features/landing/components/leaderboard'
 import { SiteFooter } from '@/client/features/landing/components/site-footer'
 import { landingFeatures } from '@/client/features/landing/config/landing-features'
 
-export function LandingPage() {
+export interface LandingViewer {
+  displayName: string
+  avatarUrl: string
+}
+
+export function LandingPage({ viewer = null }: { viewer?: LandingViewer | null }) {
   return (
     <main>
-      <Hero />
+      <Hero viewer={viewer} />
       <IntroStrip />
       <div id="features">
         {landingFeatures.map((feature, index) => (

@@ -1,4 +1,4 @@
-export type DiscordProfile = {
+export interface DiscordProfile {
   id: string
   username: string
   globalName: string | null

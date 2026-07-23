@@ -1,12 +1,13 @@
 import { LogOut } from 'lucide-react'
 import { useState } from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
+
 import logoImage from '@/client/assets/logo.png'
-import { logout } from '@/client/features/auth/api/auth-api'
-import type { PublicUser } from '@/client/features/auth/types/public-user'
+import { logout } from '@/client/lib/auth-api'
+import type { PublicUser } from '@/client/lib/public-user'
 
 export function AuthSuccessPage() {
-  const user = useLoaderData() as PublicUser
+  const user = useLoaderData<PublicUser>()
   const navigate = useNavigate()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [logoutFailed, setLogoutFailed] = useState(false)
@@ -17,7 +18,7 @@ export function AuthSuccessPage() {
 
     try {
       await logout()
-      navigate('/login', { replace: true })
+      void navigate('/login', { replace: true })
     } catch {
       setLogoutFailed(true)
       setIsLoggingOut(false)
@@ -48,7 +49,9 @@ export function AuthSuccessPage() {
         <button
           type="button"
           disabled={isLoggingOut}
-          onClick={handleLogout}
+          onClick={() => {
+            void handleLogout()
+          }}
           className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-5 text-sm font-bold text-white transition hover:bg-white/10 disabled:cursor-wait disabled:opacity-60"
         >
           <LogOut className="size-4" aria-hidden="true" />

@@ -1,4 +1,5 @@
 import { ArrowLeft, CircleDot, Code2 } from 'lucide-react'
+
 import logoImage from '@/client/assets/logo.png'
 
 export function DevelopmentPage() {
@@ -13,18 +14,19 @@ export function DevelopmentPage() {
       </header>
 
       <section className="mx-auto flex w-full max-w-[900px] flex-1 flex-col items-center justify-center px-5 py-16 text-center sm:px-8">
-        <div className="mb-7 inline-flex items-center gap-2 rounded-md border border-[#7d87f5]/25 bg-[#5865f2]/10 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#b7bdff]">
+        <div className="mb-7 inline-flex items-center gap-2 rounded-md border border-[#7d87f5]/25 bg-[#5865f2]/10 px-3 py-2 text-xs font-black tracking-[0.14em] text-[#b7bdff] uppercase">
           <CircleDot className="size-4" aria-hidden="true" />
           Développement actif
         </div>
         <span className="mb-7 flex size-16 items-center justify-center rounded-md border border-white/10 bg-white/5 text-[#9fa8ff] shadow-[0_18px_50px_rgba(0,0,0,0.25)]">
           <Code2 className="size-8" aria-hidden="true" />
         </span>
-        <h1 className="max-w-[780px] text-4xl font-black leading-[1.05] text-balance sm:text-6xl">
+        <h1 className="max-w-[780px] text-4xl leading-[1.05] font-black text-balance sm:text-6xl">
           Bet Bot est en cours de développement.
         </h1>
         <p className="mt-6 max-w-[650px] text-base leading-7 text-[#b9bdc9] sm:text-lg sm:leading-8">
-          Le bot évolue encore activement et n’est pas encore disponible au public. Nous préparons une expérience fiable avant d’ouvrir les invitations aux serveurs Discord.
+          Le bot évolue encore activement et n’est pas encore disponible au public. Nous préparons une expérience fiable avant d’ouvrir les
+          invitations aux serveurs Discord.
         </p>
         <a
           href="/"

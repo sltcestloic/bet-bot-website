@@ -1,4 +1,4 @@
-const DEFAULT_DESTINATION = '/auth/success'
+const DEFAULT_DESTINATION = '/app'
 
 export function normalizeReturnTo(destination: string | null | undefined): string {
   if (!destination || !destination.startsWith('/') || destination.startsWith('//')) {
@@ -11,9 +11,7 @@ export function normalizeReturnTo(destination: string | null | undefined): strin
 
   try {
     const parsed = new URL(destination, 'https://betbot.local')
-    return parsed.origin === 'https://betbot.local'
-      ? `${parsed.pathname}${parsed.search}${parsed.hash}`
-      : DEFAULT_DESTINATION
+    return parsed.origin === 'https://betbot.local' ? `${parsed.pathname}${parsed.search}${parsed.hash}` : DEFAULT_DESTINATION
   } catch {
     return DEFAULT_DESTINATION
   }

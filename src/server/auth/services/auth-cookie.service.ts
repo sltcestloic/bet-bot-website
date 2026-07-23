@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import type { CookieOptions, Response } from 'express'
+
 import { OAUTH_ATTEMPT_DURATION_MS, OAUTH_BROWSER_COOKIE_NAME, SESSION_COOKIE_NAME } from '@/server/auth/auth.constants'
 
 @Injectable()

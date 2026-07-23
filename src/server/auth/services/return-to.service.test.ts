@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+
 import { ReturnToService } from '@/server/auth/services/return-to.service'
 
 describe('ReturnToService', () => {
@@ -16,7 +17,7 @@ describe('ReturnToService', () => {
     '/login',
     '/login?returnTo=/auth/success',
     '/api/auth/discord',
-  ])('rejects unsafe or looping destinations: %s', (destination) => {
+  ])('rejects unsafe or looping destinations: %s', destination => {
     expect(service.normalize(destination)).toBe('/auth/success')
   })
 })

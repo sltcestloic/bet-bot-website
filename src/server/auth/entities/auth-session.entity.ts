@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
+
 import { UserEntity } from '@/server/users/entities/user.entity'
 
 @Entity({ name: 'auth_sessions' })
@@ -9,7 +10,7 @@ export class AuthSessionEntity {
   @Column({ name: 'user_id', type: 'varchar', length: 32 })
   userId!: string
 
-  @ManyToOne(() => UserEntity, (user) => user.sessions, { onDelete: 'CASCADE' })
+  @ManyToOne(() => UserEntity, user => user.sessions, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user!: UserEntity
 

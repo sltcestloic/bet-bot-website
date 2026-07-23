@@ -1,7 +1,8 @@
 import type { LoaderFunctionArgs } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
-import { AuthenticationRequiredError, AuthServiceUnavailableError } from '@/client/features/auth/api/auth-api'
+
 import { createLoginLoader, createProtectedRouteLoader } from '@/client/features/auth/routing/auth-loaders'
+import { AuthenticationRequiredError, AuthServiceUnavailableError } from '@/client/lib/auth-api'
 
 const user = {
   id: '123',
@@ -26,9 +27,7 @@ describe('auth route loaders', () => {
 
     expect(response).toBeInstanceOf(Response)
     expect((response as Response).status).toBe(302)
-    expect((response as Response).headers.get('Location')).toBe(
-      '/login?returnTo=%2Fdashboard%2Fsettings%3Ftab%3Dprofile',
-    )
+    expect((response as Response).headers.get('Location')).toBe('/login?returnTo=%2Fdashboard%2Fsettings%3Ftab%3Dprofile')
   })
 
   it('returns the user for an authenticated protected route', async () => {
@@ -49,6 +48,15 @@ describe('auth route loaders', () => {
     const response = await loader(loaderArgs('https://betbot.test/login?returnTo=%2Fauth%2Fsuccess'))
 
     expect(response).toBeInstanceOf(Response)
-    expect((response as Response).headers.get('Location')).toBe('/auth/success')
+    expect(response!.headers.get('Location')).toBe('/auth/success')
+  })
+
+  it('redirects an authenticated user to the player app by default', async () => {
+    const loader = createLoginLoader(vi.fn().mockResolvedValue(user))
+
+    const response = await loader(loaderArgs('https://betbot.test/login'))
+
+    expect(response).toBeInstanceOf(Response)
+    expect(response!.headers.get('Location')).toBe('/app')
   })
 })

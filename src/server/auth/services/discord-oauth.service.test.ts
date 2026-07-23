@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
+
 import { DiscordOAuthService } from '@/server/auth/services/discord-oauth.service'
 
 describe('DiscordOAuthService', () => {
@@ -21,22 +22,38 @@ describe('DiscordOAuthService', () => {
     expect(url.searchParams.get('state')).toBe('csrf-state')
   })
 
+  it('uses the callback URL selected for the current request', () => {
+    const service = new DiscordOAuthService(config, vi.fn())
+
+    const url = new URL(service.getAuthorizationUrl('csrf-state', 'http://192.168.1.19:5173/api/auth/discord/callback'))
+
+    expect(url.searchParams.get('redirect_uri')).toBe('http://192.168.1.19:5173/api/auth/discord/callback')
+  })
+
   it('exchanges the code and returns the current Discord profile', async () => {
-    const fetchImplementation = vi.fn()
-      .mockResolvedValueOnce(new Response(JSON.stringify({ access_token: 'temporary-token' }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      }))
-      .mockResolvedValueOnce(new Response(JSON.stringify({
-        id: '123',
-        username: 'betfan',
-        global_name: 'Bet Fan',
-        avatar: 'avatar-hash',
-        discriminator: '0',
-      }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      }))
+    const fetchImplementation = vi
+      .fn()
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ access_token: 'temporary-token' }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            id: '123',
+            username: 'betfan',
+            global_name: 'Bet Fan',
+            avatar: 'avatar-hash',
+            discriminator: '0',
+          }),
+          {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
     const service = new DiscordOAuthService(config, fetchImplementation)
 
     await expect(service.getUserFromCode('oauth-code')).resolves.toEqual({

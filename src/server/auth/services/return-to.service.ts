@@ -15,9 +15,7 @@ export class ReturnToService {
 
     try {
       const parsed = new URL(destination, 'https://betbot.local')
-      return parsed.origin === 'https://betbot.local'
-        ? `${parsed.pathname}${parsed.search}${parsed.hash}`
-        : FALLBACK_DESTINATION
+      return parsed.origin === 'https://betbot.local' ? `${parsed.pathname}${parsed.search}${parsed.hash}` : FALLBACK_DESTINATION
     } catch {
       return FALLBACK_DESTINATION
     }

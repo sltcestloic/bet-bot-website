@@ -1,11 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { LessThan, MoreThan, Repository } from 'typeorm'
-import type { UserEntity } from '@/server/users/entities/user.entity'
+
 import { AUTH_CLOCK, SESSION_DURATION_MS, SESSION_RENEWAL_INTERVAL_MS } from '@/server/auth/auth.constants'
 import { AuthSessionEntity } from '@/server/auth/entities/auth-session.entity'
-import type { Clock } from '@/server/auth/types/clock'
 import { AuthTokenService } from '@/server/auth/services/auth-token.service'
+import type { Clock } from '@/server/auth/types/clock'
+import type { UserEntity } from '@/server/users/entities/user.entity'
 
 @Injectable()
 export class AuthSessionService {
@@ -25,13 +26,15 @@ export class AuthSessionService {
     const expiresAt = new Date(now.getTime() + SESSION_DURATION_MS)
 
     await this.cleanupExpired(now)
-    await this.sessions.save(this.sessions.create({
-      tokenHash,
-      user,
-      userId: user.id,
-      expiresAt,
-      lastActivityAt: now,
-    }))
+    await this.sessions.save(
+      this.sessions.create({
+        tokenHash,
+        user,
+        userId: user.id,
+        expiresAt,
+        lastActivityAt: now,
+      }),
+    )
 
     return { token, expiresAt }
   }

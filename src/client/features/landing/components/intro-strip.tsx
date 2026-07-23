@@ -11,7 +11,7 @@ export function IntroStrip() {
         {stats.map(([value, label]) => (
           <div key={label} className="px-3 text-center sm:px-8">
             <div className="text-lg font-black text-white sm:text-2xl">{value}</div>
-            <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#8f94a3] sm:text-xs">{label}</div>
+            <div className="mt-1 text-[10px] font-bold tracking-[0.12em] text-[#8f94a3] uppercase sm:text-xs">{label}</div>
           </div>
         ))}
       </div>

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-type DiscordButtonProps = {
+interface DiscordButtonProps {
   children: ReactNode
   secondary?: boolean
   href?: string

@@ -1,4 +1,4 @@
-export type PublicUser = {
+export interface PublicUser {
   id: string
   username: string
   displayName: string

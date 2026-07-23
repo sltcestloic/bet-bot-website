@@ -1,6 +1,7 @@
 import { ArrowLeft } from 'lucide-react'
 import { FaDiscord } from 'react-icons/fa'
 import { useSearchParams } from 'react-router-dom'
+
 import logoImage from '@/client/assets/logo.png'
 import { normalizeReturnTo } from '@/client/features/auth/routing/return-to'
 
@@ -18,13 +19,18 @@ export function LoginPage() {
           <img src={logoImage} alt="" className="size-14 object-contain" />
           <span className="text-xl font-black">Bet Bot</span>
         </a>
-        <h1 id="login-title" className="mt-10 text-3xl font-black sm:text-4xl">Connexion</h1>
+        <h1 id="login-title" className="mt-10 text-3xl font-black sm:text-4xl">
+          Connexion
+        </h1>
         <p className="mt-4 text-sm leading-6 text-[#b9bdc9] sm:text-base">
           Utilisez votre compte Discord pour accéder au tableau de bord Bet Bot.
         </p>
 
         {hasOAuthError && (
-          <p role="alert" className="mt-6 rounded-md border border-[#f07468]/35 bg-[#f07468]/10 px-4 py-3 text-sm font-semibold text-[#ffc6c0]">
+          <p
+            role="alert"
+            className="mt-6 rounded-md border border-[#f07468]/35 bg-[#f07468]/10 px-4 py-3 text-sm font-semibold text-[#ffc6c0]"
+          >
             La connexion avec Discord a échoué. Vous pouvez réessayer.
           </p>
         )}

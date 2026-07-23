@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
-import { AuthenticationRequiredError, AuthServiceUnavailableError, getCurrentUser } from '@/client/features/auth/api/auth-api'
+
+import { AuthenticationRequiredError, AuthServiceUnavailableError, getCurrentUser } from '@/client/lib/auth-api'
 
 describe('getCurrentUser', () => {
   it('returns the authenticated Discord profile', async () => {

@@ -2,6 +2,7 @@
 
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
+
 import { AuthLoadingPage } from '@/client/features/auth/components/auth-loading-page'
 
 describe('AuthLoadingPage', () => {
