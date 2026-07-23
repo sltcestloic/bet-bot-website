@@ -65,3 +65,33 @@ describe('RewardReveal', () => {
     expect(gameRequest).toHaveBeenCalledOnce()
   })
 })
+
+describe('RewardReveal viewport behavior', () => {
+  it('portals the scrollable dialog, locks page scroll, traps focus, and restores focus', async () => {
+    const previous = document.createElement('button')
+    document.body.append(previous)
+    previous.focus()
+
+    const view = render(<RewardReveal guildId="guild" achievements={[achievements[0]]} />)
+    const dialog = screen.getByRole('dialog')
+    const close = screen.getByRole('button', { name: 'Fermer' })
+    const action = screen.getByRole('button', { name: 'Continuer' })
+
+    expect(dialog.parentElement).toBe(document.body)
+    expect(dialog.className).toContain('overflow-y-auto')
+    expect(document.body.style.overflow).toBe('hidden')
+    await waitFor(() => {
+      expect(document.activeElement).toBe(action)
+    })
+
+    fireEvent.keyDown(document, { key: 'Tab' })
+    expect(document.activeElement).toBe(close)
+    fireEvent.keyDown(document, { key: 'Tab', shiftKey: true })
+    expect(document.activeElement).toBe(action)
+
+    view.unmount()
+    expect(document.body.style.overflow).toBe('')
+    expect(document.activeElement).toBe(previous)
+    previous.remove()
+  })
+})

@@ -1,5 +1,6 @@
 import { Award, Crown, Sparkles, X } from 'lucide-react'
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { type RefObject, useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import { gameRequest } from '@/client/features/game/api/game-api'
 
@@ -14,8 +15,12 @@ type RevealStatus = 'idle' | 'saving' | 'error' | 'complete'
 export function RewardReveal({ guildId, achievements }: { guildId: string; achievements: Achievement[] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [status, setStatus] = useState<RevealStatus>('idle')
+  const dialogRef = useRef<HTMLElement>(null)
+  const actionRef = useRef<HTMLButtonElement>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
   const achievement = achievements[currentIndex]
   const hasNext = currentIndex < achievements.length - 1
+  const open = Boolean(achievement) && status !== 'complete'
 
   const dismiss = useCallback(async () => {
     if (!achievement || status === 'saving' || status === 'complete') return
@@ -35,7 +40,11 @@ export function RewardReveal({ guildId, achievements }: { guildId: string; achie
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') void dismiss()
+      if (event.key === 'Escape') {
+        void dismiss()
+        return
+      }
+      if (event.key === 'Tab') trapFocus(event, dialogRef.current)
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => {
@@ -43,23 +52,70 @@ export function RewardReveal({ guildId, achievements }: { guildId: string; achie
     }
   }, [dismiss])
 
-  if (!achievement || status === 'complete') return null
+  useEffect(() => {
+    if (!open) return
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+      previousFocusRef.current?.focus()
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (open && status !== 'saving') actionRef.current?.focus()
+  }, [achievement?.key, open, status])
+
+  if (!achievement || !open) return null
+  return createPortal(
+    <RewardDialog
+      key={achievement.key}
+      achievement={achievement}
+      status={status}
+      hasNext={hasNext}
+      dismiss={dismiss}
+      dialogRef={dialogRef}
+      actionRef={actionRef}
+    />,
+    document.body,
+  )
+}
+
+function RewardDialog({
+  achievement,
+  status,
+  hasNext,
+  dismiss,
+  dialogRef,
+  actionRef,
+}: {
+  achievement: Achievement
+  status: RevealStatus
+  hasNext: boolean
+  dismiss: () => Promise<void>
+  dialogRef: RefObject<HTMLElement | null>
+  actionRef: RefObject<HTMLButtonElement | null>
+}) {
   const podium = achievement.key.includes('rank') || achievement.key.includes('top')
   const saving = status === 'saving'
   return (
     <div
-      className="fixed inset-0 z-[80] grid place-items-center bg-black/72 px-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[80] overflow-y-auto bg-black/72 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-label="Nouveau record personnel"
     >
-      <Fragment key={achievement.key}>
-        <div className="reward-particles absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div className="relative flex min-h-full items-center justify-center px-4 py-4 sm:py-8">
+        <div className="reward-particles pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
           {Array.from({ length: 36 }, (_, index) => (
             <i key={index} style={{ left: `${(index * 29) % 100}%`, animationDelay: `${(index % 9) * 55}ms` }} />
           ))}
         </div>
-        <section className="reward-reveal relative w-full max-w-md overflow-hidden rounded-xl border border-[#f4c25b]/35 bg-[#151827] p-6 text-center shadow-[0_30px_100px_rgba(0,0,0,.8),0_0_70px_rgba(244,194,91,.12)] sm:p-8">
+        <section
+          ref={dialogRef}
+          className="reward-reveal relative w-full max-w-md overflow-hidden rounded-xl border border-[#f4c25b]/35 bg-[#151827] p-6 text-center shadow-[0_30px_100px_rgba(0,0,0,.8),0_0_70px_rgba(244,194,91,.12)] sm:p-8"
+        >
           <button
             type="button"
             onClick={() => void dismiss()}
@@ -81,6 +137,7 @@ export function RewardReveal({ guildId, achievements }: { guildId: string; achie
             </p>
           )}
           <button
+            ref={actionRef}
             type="button"
             onClick={() => void dismiss()}
             disabled={saving}
@@ -90,9 +147,28 @@ export function RewardReveal({ guildId, achievements }: { guildId: string; achie
             {getActionLabel(status, hasNext)}
           </button>
         </section>
-      </Fragment>
+      </div>
     </div>
   )
+}
+
+function trapFocus(event: KeyboardEvent, container: HTMLElement | null) {
+  if (!container) return
+  const controls = Array.from(container.querySelectorAll<HTMLElement>('button:not(:disabled), [href], [tabindex]:not([tabindex="-1"])'))
+  if (!controls.length) {
+    event.preventDefault()
+    return
+  }
+  const first = controls[0]
+  const last = controls[controls.length - 1]
+  const outside = !container.contains(document.activeElement)
+  if (event.shiftKey && (document.activeElement === first || outside)) {
+    event.preventDefault()
+    last.focus()
+  } else if (!event.shiftKey && (document.activeElement === last || outside)) {
+    event.preventDefault()
+    first.focus()
+  }
 }
 
 function getActionLabel(status: RevealStatus, hasNext: boolean) {
