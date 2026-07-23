@@ -39,7 +39,7 @@ export class DashboardService {
       () => this.loadOverview(discordId, guildId, season),
       refresh,
     )
-    const celebration = evaluateAchievements
+    const celebrations = evaluateAchievements
       ? await this.achievements.evaluate(discordId, guildId, season?.id ?? null, {
           wins: cached.data.metrics.wins,
           settled: cached.data.metrics.settled,
@@ -48,8 +48,8 @@ export class DashboardService {
           longestWinning: cached.data.streaks.longestWinning,
           rank: cached.data.rank?.rank,
         })
-      : null
-    return { ...cached, data: { ...cached.data, celebration } }
+      : []
+    return { ...cached, data: { ...cached.data, celebrations } }
   }
 
   async getPerformance(discordId: string, guildId: string, seasonValue?: string, refresh = false, filters: DashboardFilters = {}) {
@@ -155,7 +155,7 @@ export class DashboardService {
         ...overview.data,
         account: null,
         rank: overview.data.rank ? { ...overview.data.rank, value: null } : null,
-        celebration: null,
+        celebrations: [],
       },
       performance: performance.data,
     }

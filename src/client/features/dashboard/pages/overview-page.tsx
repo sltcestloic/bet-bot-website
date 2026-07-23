@@ -51,7 +51,7 @@ function OverviewContent({
   const hasPerformance = data.metrics.settled > 0
   return (
     <PageFrame>
-      {data.celebration && guildId && <AchievementCelebration guildId={guildId} achievement={data.celebration} />}
+      {data.celebrations[0] && guildId && <AchievementCelebration guildId={guildId} achievement={data.celebrations[0]} />}
       <PageHeader
         title="Vue d’ensemble"
         description="Votre position, votre forme et vos derniers tickets."

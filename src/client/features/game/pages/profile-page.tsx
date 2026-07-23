@@ -61,7 +61,7 @@ function ProfileContent({ data, root, guildId, stale }: { data: OverviewData; ro
   const rivals = viewerIndex >= 0 ? board.slice(Math.max(0, viewerIndex - 2), viewerIndex + 3) : []
   return (
     <GameFrame>
-      {data.celebration && <RewardReveal guildId={guildId} achievement={data.celebration} />}
+      {data.celebrations.length > 0 && <RewardReveal guildId={guildId} achievements={data.celebrations} />}
       <GamePageHeader eyebrow={`Saison ${data.season?.number ?? 'active'}`} title="Mon profil" stale={stale} />
       <ProfilePlate data={data} root={root} account={account} movement={movement} />
       <ProfileStats data={data} />

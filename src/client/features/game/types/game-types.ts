@@ -98,7 +98,7 @@ export interface OverviewData {
   rank: { rank: number | null; value: number | null; settled: number } | null
   previousRank: number | null
   activity: { activeDays: number; betsPlaced: number; dailyClaims: number }
-  celebration: { key: string; title: string; detail: string } | null
+  celebrations: { key: string; title: string; detail: string }[]
   activeTickets?: GameTicket[]
   recentResults?: GameTicket[]
   leaderboards: Record<string, LeaderboardRow[]>

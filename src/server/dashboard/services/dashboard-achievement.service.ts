@@ -20,6 +20,14 @@ interface AchievementFacts {
   rank?: number | null
 }
 
+interface AchievementCelebration {
+  key: string
+  title: string
+  detail: string
+}
+
+const achievementOrder = ['largest-net-win', 'highest-winning-odds', 'longest-winning-streak', 'best-rank'] as const
+
 @Injectable()
 export class DashboardAchievementService {
   constructor(private readonly store: AchievementStore) {}
@@ -35,11 +43,8 @@ export class DashboardAchievementService {
           this.store.save({ userId, guildId, seasonKey, ...candidate, pending: false, pendingTitle: null, pendingDetail: null }),
         ),
       )
-      return null
+      return []
     }
-
-    const currentPending = existing.find(achievement => achievement.pending)
-    if (currentPending) return toCelebration(currentPending)
 
     const missing = values.filter(candidate => !existing.some(achievement => achievement.key === candidate.key))
     if (missing.length)
@@ -58,21 +63,27 @@ export class DashboardAchievementService {
           : candidate.bestValue > previous.bestValue)
       )
     })
-    if (!improvements.length) return null
+    const improvedCelebrations = new Map<string, AchievementCelebration>()
+    await Promise.all(
+      improvements.map(candidate => {
+        const presentation = presentationFor(candidate.key, candidate.bestValue)
+        improvedCelebrations.set(candidate.key, { key: candidate.key, ...presentation })
+        return this.store.save({
+          userId,
+          guildId,
+          seasonKey,
+          ...candidate,
+          pending: true,
+          pendingTitle: presentation.title,
+          pendingDetail: presentation.detail,
+        })
+      }),
+    )
 
-    const selected = improvements[0]
-    const presentation = presentationFor(selected.key, selected.bestValue)
-    const updated = {
-      userId,
-      guildId,
-      seasonKey,
-      ...selected,
-      pending: true,
-      pendingTitle: presentation.title,
-      pendingDetail: presentation.detail,
-    }
-    await this.store.save(updated)
-    return { key: selected.key, ...presentation }
+    const pendingCelebrations = new Map(
+      existing.filter(achievement => achievement.pending).map(achievement => [achievement.key, toCelebration(achievement)]),
+    )
+    return achievementOrder.flatMap(key => improvedCelebrations.get(key) ?? pendingCelebrations.get(key) ?? [])
   }
 
   acknowledge(userId: string, guildId: string, seasonId: number | null, key: string) {
